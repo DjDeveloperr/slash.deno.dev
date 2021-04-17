@@ -4,7 +4,7 @@ export interface FetchEvent extends Event {
 }
 
 addEventListener("fetch", ((evt: FetchEvent) => {
-  const path = evt.request.url;
+  const path = new URL(evt.request.url).pathname;
 
   if (path == "/") {
     evt.respondWith(
