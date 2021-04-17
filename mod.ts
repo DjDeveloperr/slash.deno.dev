@@ -3,18 +3,18 @@ export interface FetchEvent extends Event {
   request: Request;
 }
 
-addEventListener("fetch", (({ request, respondWith }: FetchEvent) => {
-  const path = request.url;
+addEventListener("fetch", ((evt: FetchEvent) => {
+  const path = evt.request.url;
 
   if (path == "/") {
-    respondWith(
+    evt.respondWith(
       new Response(
         "Import Harmony Deploy Slash Commands\n- `/main` - from main branch\n- `/<version>` - versioned import"
       )
     );
   } else {
     const version = path.slice(1);
-    respondWith(
+    evt.respondWith(
       new Response(null, {
         status: 302,
         headers: {
